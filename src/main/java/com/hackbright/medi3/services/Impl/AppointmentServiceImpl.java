@@ -46,13 +46,19 @@ public class AppointmentServiceImpl implements com.hackbright.medi3.services.App
 
     @Override
     @Transactional
-    public void addAppointment(AppointmentDTO appointmentDto, Long patientId) {
+    public void addAppointment(AppointmentDTO appointmentDto, Long patientId, Long doctorId) {
+        System.out.println("\n\n\n");
+        System.out.println(doctorId);
+        System.out.println("\n\n\n");
         Optional<Patient> patientOptional = patientRepository.findById(patientId);
-        Optional<Doctor> doctorOptional = doctorRepository.findById((long) 1);
-
+        Optional<Doctor> doctorOptional = doctorRepository.findById(doctorId);
+        System.out.println("\n\n\nIN SERVICES: got doctor and patients from repo. Now gonna create appointment from dto;\n\n\n");
         Appointment appointment = new Appointment(appointmentDto);
+        System.out.println("\n\n\nIN SERVICES: created appointment from DTO\n\n\n");
         patientOptional.ifPresent(appointment::setPatient);
+        System.out.println("\n\n\nIN SERVICES: added patient to appointment\n\n\n");
         doctorOptional.ifPresent(appointment::setDoctor);
+        System.out.println("\n\n\nIN SERVICES: added doctor to appointment\n\n\n");
         appointmentRepository.saveAndFlush(appointment);
     }
 
@@ -89,8 +95,8 @@ public class AppointmentServiceImpl implements com.hackbright.medi3.services.App
         appointmentOptional.ifPresent(appointment -> {
 
             appointment.setDepartment(appointmentDto.getDepartment());
-            appointment.setRDate(appointmentDto.getRDate());
-            appointment.setRTime(appointmentDto.getRTime());
+//            appointment.setRDate(appointmentDto.getRDate());
+//            appointment.setRTime(appointmentDto.getRTime());
             appointment.setAppcategory(appointmentDto.getAppcategory());
             appointmentRepository.saveAndFlush(appointment);
         });

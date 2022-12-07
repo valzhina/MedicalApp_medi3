@@ -10,13 +10,14 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("api/v1/appointments")
+@RequestMapping("/api/v1/appointments")
 public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
 
     @GetMapping("/patient/{patientId}")
     public List<AppointmentDTO> getAppointmentByPatient(@PathVariable Long patientId){
+        System.out.println("\n\n\nget appointments\n\n\n");
         return appointmentService.getAllAppointmentsByPatientId(patientId);
     }
 
@@ -30,9 +31,12 @@ public class AppointmentController {
         return appointmentService.getAppointmentById(appointmentId);
     }
 
-    @PostMapping("/patient/{patientId}")
-    public void addAppointment(@RequestBody AppointmentDTO appointmentDto,@PathVariable Long patientId) {
-        appointmentService.addAppointment(appointmentDto, patientId);
+    @PostMapping("/patient/{patientId}/{doctorId}")
+    public void addAppointment(@RequestBody AppointmentDTO appointmentDto,@PathVariable Long patientId, @PathVariable Long doctorId) {
+        System.out.println("\n\n\nIN CONTROLLER");
+        System.out.println(doctorId);
+        System.out.println("\n\n\n");
+        appointmentService.addAppointment(appointmentDto, patientId, doctorId);
     }
 
     @DeleteMapping("/{appointmentId}")

@@ -27,7 +27,6 @@ public class PatientController {
     }
     @PostMapping("/login")
     public List<String> patientLogin(@RequestBody PatientDTO patientDto){
-        System.out.println("\n\n\n We are here!!!\n\n\n");
         return patientService.patientLogin(patientDto);
     }
 }

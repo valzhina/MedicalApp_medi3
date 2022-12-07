@@ -58,26 +58,22 @@ public class Doctor {
         if (doctorDto.getEmail() != null) {
             this.email = doctorDto.getEmail();
         }
-//        if (doctorDto.getPatientList() != null) {
-//            this.patientList = doctorDto.getPatientList();
-//        }
         if (doctorDto.getPassword() != null) {
             this.password = doctorDto.getPassword();
         }
     }
 
-    @Override
-    public String toString() {
-        return "Doctor{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", password='" + password + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", doctor_id='" + doctor_id + '\'' +
-                ", email='" + email + '\'' +
-//                ", patientList=" + patientList +
-                ", appointmentSet=" + appointmentSet +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Doctor{" +
+//                "id=" + id +
+//                ", firstName='" + firstName + '\'' +
+//                ", password='" + password + '\'' +
+//                ", lastName='" + lastName + '\'' +
+//                ", doctor_id='" + doctor_id + '\'' +
+//                ", email='" + email + '\'' +
+//                ", appointmentSet=" + appointmentSet +
+//                '}';
+//    }
 }
 

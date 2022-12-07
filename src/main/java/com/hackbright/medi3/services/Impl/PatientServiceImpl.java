@@ -39,7 +39,7 @@ public class PatientServiceImpl implements com.hackbright.medi3.services.Patient
         if (patientOptional.isPresent()){
             // check to see if the password matches the hash by two conditional statements
             if (passwordEncoder.matches(patientDto.getPassword(), patientOptional.get().getPassword())){
-                response.add("http://localhost:8080/patienthome.html");
+                response.add("http://localhost:8080/patientappointments.html");
                 response.add(String.valueOf(patientOptional.get().getId()));
             } else {
                 response.add("Username or password incorrect");

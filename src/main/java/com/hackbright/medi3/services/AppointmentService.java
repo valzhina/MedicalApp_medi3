@@ -12,7 +12,7 @@ public interface AppointmentService {
     List<AppointmentDTO> getAllAppointmentsByDoctorId(Long doctorId);
 
     @Transactional
-    void addAppointment(AppointmentDTO appointmentDto, Long patientId);
+    void addAppointment(AppointmentDTO appointmentDto, Long patientId, Long doctorId);
 
     Optional<AppointmentDTO> getAppointmentById(Long appointmentId);
 
