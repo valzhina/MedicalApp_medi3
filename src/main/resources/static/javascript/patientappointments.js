@@ -7,6 +7,7 @@ const patientId = cookieArr[1];
 const submitForm = document.getElementById("request-form")
 const requestContainer = document.getElementById("request-container") // By ID
 
+
 const headers = {
     'Content-Type': 'application/json'
 }
@@ -20,7 +21,7 @@ const handleSubmit = async (e) => {
     let bodyObj = {
         department: document.getElementById("department").value,
         appcategory: document.getElementById("appcategory").value,
-//        doctor: document.getElementById("doctor").value,
+
         status: "upcoming"
     }
 
@@ -82,6 +83,59 @@ const createAppointmentCards = (array) => {
     requestContainer.innerHTML = ''
     array.forEach(obj => {
         if(obj.status=="upcoming") {
+            let requestCard = document.createElement("tr")
+            requestCard.innerHTML = `
+                <tr>
+                    <td>
+                        <div class="user-info">
+                            <div class="user-info__img">
+                                <img src="img/user1." alt="User Img">
+                            </div>
+                            <div class="user-info__basic">
+                                <h5 class="mb-0">${obj.doctor.firstName} ${obj.doctor.lastName} , MD </h5>
+                                <p class="text-muted mb-0">34 yrs, Male</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="btn btn-success">${obj.appcategory}</span>
+                    </td>
+                    <td>
+                        <h6 class="mb-0">${obj.rTime}</h6>
+                        <small>${obj.rDate}</small>
+                    </td>
+                    <td>
+                        <h6 class="mb-0">${obj.doctor.email}</h6>
+                        <a href="#!"><small>Contact</small></a>
+                    </td>
+                    <td>
+                        <h6 class="mb-0">${obj.department}</h6>
+                    </td>
+                    <td>
+                        <div class="dropdown open">
+                            <a href="#!" class="px-2" id="triggerId1" data-toggle="dropdown" aria-haspopup="true"
+                               aria-expanded="false">
+                                <i class="fa fa-ellipsis-v"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="triggerId1">
+                                <a class="dropdown-item" href="#"><i class="fa fa-pencil mr-1"></i> Edit</a>
+                                <a class="dropdown-item text-danger" href="#"><i class="fa fa-trash mr-1"></i> Delete</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            `
+            requestContainer.append(requestCard)
+        }
+    })
+}
+
+/* Copy
+const createAppointmentCards = (array) => {
+    console.log("Started create request cards")
+    requestContainer.innerHTML = ''
+    array.forEach(obj => {
+        if(obj.status=="upcoming") {
             let requestCard = document.createElement("div")
             requestCard.classList.add("col")
             requestCard.innerHTML = `
@@ -104,7 +158,7 @@ const createAppointmentCards = (array) => {
         }
     })
 }
-
+*/
 
 function handleLogout(){
     let c = document.cookie.split(";");
