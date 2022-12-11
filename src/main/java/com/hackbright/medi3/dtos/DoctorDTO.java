@@ -24,6 +24,8 @@ public class DoctorDTO implements Serializable {
 //    private List<Patient> patientList;
     private String email;
     private String doctor_id;
+    private String dimage;
+    private String dage;
     private Set<AppointmentDTO> AppointmentDtoSet = new HashSet<>();
 
     public DoctorDTO(Doctor doctor){
@@ -45,6 +47,12 @@ public class DoctorDTO implements Serializable {
         if (doctor.getPassword() != null) {
             this.password = doctor.getPassword();
         }
+        if (doctor.getDimage() != null) {
+            this.dimage = doctor.getDimage();
+        }
+        if (doctor.getDage() != null) {
+            this.dage = doctor.getDage();
+        }
     }
 
 
@@ -58,6 +66,7 @@ public class DoctorDTO implements Serializable {
                 ", doctor_id='" + doctor_id + '\'' +
 //                ", patientList=" + patientList +
                 ", email='" + email + '\'' +
+                ", dimage='" + dimage + '\'' +
                 '}';
     }
 }

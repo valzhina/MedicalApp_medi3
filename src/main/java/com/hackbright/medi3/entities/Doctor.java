@@ -38,6 +38,12 @@ public class Doctor {
     @Column(name = "email", unique = true)
     private String email;
 
+    @Column(name = "dimage")
+    private String dimage;
+
+    @Column(name = "dage")
+    private String dage;
+
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY,
             cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 
@@ -61,6 +67,12 @@ public class Doctor {
         if (doctorDto.getPassword() != null) {
             this.password = doctorDto.getPassword();
         }
+        if (doctorDto.getDimage() != null) {
+            this.dimage = doctorDto.getDimage();
+        }
+        if (doctorDto.getDage() != null) {
+            this.dage = doctorDto.getDage();
+        }
     }
 
 //    @Override
@@ -73,6 +85,7 @@ public class Doctor {
 //                ", doctor_id='" + doctor_id + '\'' +
 //                ", email='" + email + '\'' +
 //                ", appointmentSet=" + appointmentSet +
+//                ", dimage=" + dimage +
 //                '}';
 //    }
 }

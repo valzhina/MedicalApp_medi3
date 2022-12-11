@@ -11,6 +11,8 @@ public interface AppointmentService {
 
     List<AppointmentDTO> getAllAppointmentsByDoctorId(Long doctorId);
 
+    List<AppointmentDTO> getAllAppointmentsByDoctorIdForDate(Long doctorId, String date);
+
     @Transactional
     void addAppointment(AppointmentDTO appointmentDto, Long patientId, Long doctorId);
 

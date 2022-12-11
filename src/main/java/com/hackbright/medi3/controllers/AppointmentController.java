@@ -26,6 +26,11 @@ public class AppointmentController {
         return appointmentService.getAllAppointmentsByDoctorId(doctorId);
     }
 
+    @GetMapping("/times/{doctorId}/{date}")
+    public List<AppointmentDTO> getByDoctorDate(@PathVariable Long doctorId, @PathVariable String date){
+        return appointmentService.getAllAppointmentsByDoctorIdForDate(doctorId, date);
+    }
+
     @GetMapping("/{appointmentId}")
     public Optional<AppointmentDTO> getAppointmentById(@PathVariable Long appointmentId){
         return appointmentService.getAppointmentById(appointmentId);
@@ -33,9 +38,9 @@ public class AppointmentController {
 
     @PostMapping("/patient/{patientId}/{doctorId}")
     public void addAppointment(@RequestBody AppointmentDTO appointmentDto,@PathVariable Long patientId, @PathVariable Long doctorId) {
-        System.out.println("\n\n\nIN CONTROLLER");
-        System.out.println(doctorId);
-        System.out.println("\n\n\n");
+//        System.out.println("\n\n\nIN CONTROLLER");
+//        System.out.println(doctorId);
+//        System.out.println("\n\n\n");
         appointmentService.addAppointment(appointmentDto, patientId, doctorId);
     }
 

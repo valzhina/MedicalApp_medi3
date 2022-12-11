@@ -19,8 +19,8 @@ public class AppointmentDTO {
     private Doctor doctor;
     private Patient patient;
     private String department;
-    private java.sql.Date rDate;
-    private java.sql.Time rTime;
+    private String rdate;
+    private String rtime;
     private String appcategory;
     private String status;
 
@@ -37,11 +37,11 @@ public class AppointmentDTO {
         if (appointment.getDepartment() != null) {
             this.department = appointment.getDepartment();
         }
-        if (appointment.getRDate() != null) {
-            this.rDate = appointment.getRDate();
+        if (appointment.getRdate() != null) {
+            this.rdate = appointment.getRdate();
         }
-        if (appointment.getRTime() != null) {
-            this.rTime = appointment.getRTime();
+        if (appointment.getRtime() != null) {
+            this.rtime = appointment.getRtime();
         }
         if (appointment.getAppcategory() != null) {
             this.appcategory = appointment.getAppcategory();
@@ -49,6 +49,14 @@ public class AppointmentDTO {
         if (appointment.getStatus() != null) {
             this.status = appointment.getStatus();
         }
+    }
+
+    public String toString() {
+        return "department: " + getDepartment() +
+                "\nappcategory: " + getAppcategory() +
+                "\nstatus: " + getStatus() +
+                "\nrDate: " + getRdate() +
+                "\nrTime: " + getRtime();
     }
 }
 

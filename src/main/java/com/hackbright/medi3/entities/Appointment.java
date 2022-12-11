@@ -30,10 +30,12 @@ public class Appointment {
     private String department;
 
     @Column
-    private java.sql.Date rDate;
+    private String rdate;
+//    private java.sql.Date rDate;
 
     @Column
-    private java.sql.Time rTime;
+    private String rtime;
+//    private java.sql.Time rTime;
 
     @Column
     //Could be new patient or following up appointment
@@ -49,12 +51,12 @@ public class Appointment {
         if (appointmentDto.getDepartment() != null){
             this.department = appointmentDto.getDepartment();
         }
-        if (appointmentDto.getRDate() != null){
-            this.rDate = appointmentDto.getRDate();
+        if (appointmentDto.getRdate() != null){
+            this.rdate = appointmentDto.getRdate();
         }
 
-        if (appointmentDto.getRTime() != null){
-            this.rTime = appointmentDto.getRTime();
+        if (appointmentDto.getRtime() != null){
+            this.rtime = appointmentDto.getRtime();
         }
 
         if (appointmentDto.getAppcategory() != null){

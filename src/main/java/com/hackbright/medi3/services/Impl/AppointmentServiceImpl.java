@@ -45,6 +45,26 @@ public class AppointmentServiceImpl implements com.hackbright.medi3.services.App
     }
 
     @Override
+    public List<AppointmentDTO> getAllAppointmentsByDoctorIdForDate(Long doctorId, String date){
+        Optional<Doctor> doctorOptional = doctorRepository.findById(doctorId);
+        System.out.println("\n\n" + date + "\n");
+        if (doctorOptional.isPresent()){
+            List<Appointment> appointmentList = appointmentRepository.findAllByDoctorEquals(doctorOptional.get());
+            List<Appointment> busyList = new ArrayList<Appointment>();
+            System.out.println("\n\n" + "created applist and busylist" + "\n\n");
+            for(Appointment app: appointmentList) {
+                System.out.println(app.getRtime() + "\n\n");
+                System.out.println("\n\n" + app.getRdate() + "\n" + date + "\n\n");
+                if(app.getRdate().equals(date)){
+                    busyList.add(app);
+                }
+            }
+            return busyList.stream().map(appointment -> new AppointmentDTO(appointment)).collect(Collectors.toList());
+        }
+        return Collections.emptyList();
+    }
+
+    @Override
     @Transactional
     public void addAppointment(AppointmentDTO appointmentDto, Long patientId, Long doctorId) {
         System.out.println("\n\n\n");
@@ -59,6 +79,8 @@ public class AppointmentServiceImpl implements com.hackbright.medi3.services.App
         System.out.println("\n\n\nIN SERVICES: added patient to appointment\n\n\n");
         doctorOptional.ifPresent(appointment::setDoctor);
         System.out.println("\n\n\nIN SERVICES: added doctor to appointment\n\n\n");
+        System.out.println(appointmentDto.toString() +"\n\n\n");
+
         appointmentRepository.saveAndFlush(appointment);
     }
 

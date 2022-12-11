@@ -4,51 +4,61 @@ async function handleSeed() {
         'Content-Type':'application/json'
     }
 
+//Doctor 1 Log in
     let bodyObj = {
-        firstName: "Kate",
-        lastName: "Kate",
-        doctor_id: "Kate",
-        email: "x",
-        password: "x"
-    }
-
-    await fetch('http://localhost:8080/api/v1/doctors/register', {
-        method: "POST",
-        body: JSON.stringify(bodyObj),
-        headers: headers
-    }).catch(err => console.error(err.message))
-
-    bodyObj = {
-        firstName: "John",
-        lastName: "Smith",
-        doctor_id: "Smith",
-        email: "y",
-        password: "y"
-    }
-
-    await fetch('http://localhost:8080/api/v1/doctors/register', {
-        method: "POST",
-        body: JSON.stringify(bodyObj),
-        headers: headers
-    }).catch(err => console.error(err.message))
-
-     bodyObj = {
-        firstName: "Mike",
-        lastName: "Tyson",
-        doctor_id: "Mikey",
-        email: "z",
-        password: "z"
-    }
-
-    await fetch('http://localhost:8080/api/v1/doctors/register', {
-        method: "POST",
-        body: JSON.stringify(bodyObj),
-        headers: headers
-    }).catch(err => console.error(err.message))
-
-    bodyObj = {
         firstName: "Elizabeth",
+        lastName: "Genovese",
+        doctor_id: "MD-395",
+        email: "egenovese@gmail.com",
+        password: "11111111",
+        dimage: "./img/user1.jpg",
+        dage:"29 yrs, Female"
+    }
+
+    await fetch('http://localhost:8080/api/v1/doctors/register', {
+        method: "POST",
+        body: JSON.stringify(bodyObj),
+        headers: headers
+    }).catch(err => console.error(err.message))
+
+//Doctor 2 Log in
+    bodyObj = {
+        firstName: "Thomas",
+        lastName: "Goldberg",
+        doctor_id: "tgoldberg@gmail.com",
+        email: "OM-165",
+        password: "22222222",
+        dimage: "./img/user1.jpg",
+        dage:"42 yrs, Male"
+    }
+
+    await fetch('http://localhost:8080/api/v1/doctors/register', {
+        method: "POST",
+        body: JSON.stringify(bodyObj),
+        headers: headers
+    }).catch(err => console.error(err.message))
+
+//Doctor 3 Log in
+     bodyObj = {
+        firstName: "Julie",
         lastName: "Wimbley",
+        doctor_id: "MC-632",
+        email: "jwimbley@gmail.com",
+        password: "33333333",
+        dimage: "./img/user1.jpg",
+        dage:"34 yrs, Female"
+    }
+
+    await fetch('http://localhost:8080/api/v1/doctors/register', {
+        method: "POST",
+        body: JSON.stringify(bodyObj),
+        headers: headers
+    }).catch(err => console.error(err.message))
+
+//Patient a Log in
+    bodyObj = {
+        firstName: "Kiran",
+        lastName: "Freeman,",
         patientName: "a",
         password: "a"
     }
@@ -59,9 +69,10 @@ async function handleSeed() {
         headers: headers
     }).catch(err => console.error(err.message))
 
+//Patient b Log in
     bodyObj = {
-        firstName: "Thomas",
-        lastName: "Bikhman",
+        firstName: "Vasilios",
+        lastName: "Brown,",
         patientName: "b",
         password: "b"
     }
@@ -72,9 +83,11 @@ async function handleSeed() {
         headers: headers
     }).catch(err => console.error(err.message))
 
+
+//Patient c Log in
     bodyObj = {
-        firstName: "Peggy",
-        lastName: "Genovese",
+        firstName: "Catherine",
+        lastName: "Lieman,",
         patientName: "c",
         password: "c"
     }

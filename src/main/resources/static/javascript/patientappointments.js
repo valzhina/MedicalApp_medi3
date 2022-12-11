@@ -2,10 +2,18 @@
 const cookieArr = document.cookie.split("=")
 const patientId = cookieArr[1];
 
+function checkLogin(){
+    if(!patientId){
+        window.location.replace("http://localhost:8080/loginpatient.html");
+    }
+}
+
 
 //DOM Elements
 const submitForm = document.getElementById("request-form")
 const requestContainer = document.getElementById("request-container") // By ID
+const timesMenu = document.getElementById("rTime") // By ID
+
 
 
 const headers = {
@@ -21,7 +29,8 @@ const handleSubmit = async (e) => {
     let bodyObj = {
         department: document.getElementById("department").value,
         appcategory: document.getElementById("appcategory").value,
-
+        rdate: document.getElementById("rDate").value,
+        rtime: document.getElementById("rTime").value,
         status: "upcoming"
     }
 
@@ -40,9 +49,49 @@ async function addAppointment(obj) {
         .catch(err => console.error(err.message))
     if (response.status == 200) {
 //        await sendMessageToDoctor();
-        window.location.replace("http://localhost:8080/patientappointments.html")
+        window.location.replace("http://localhost:8080/patientappointments.html");
+        updateTime();
     }
 }
+
+async function updateTime() {
+    console.log("updateTime");
+    const doctorId = document.getElementById("doctor").value;
+    const date = document.getElementById("rDate").value;
+    await fetch(`${baseUrl}times/${doctorId}/${date}`, {
+        method: "GET",
+        headers: headers
+    })
+        .then(response => response.json())
+        .then(data => populateTimes(data))
+        .catch(err => console.error(err))
+}
+
+const populateTimes = (array) => {
+    console.log("Started populating times");
+    console.log(array);
+    let busy = [];
+    array.forEach(obj => {
+        busy.push(obj.rtime);
+    })
+    console.log(busy);
+    timesMenu.innerHTML = '';
+    const times = ["09:00AM", "10:00AM", "11:00AM", "12:00PM", "01:00PM", "02:00PM", "03:00PM", "04:00PM", "05:00PM"];
+    times.forEach(obj => {
+        console.log(obj);
+        if(!busy.includes(obj)) {
+            console.log("y");
+            timesMenu.insertAdjacentHTML("beforeend", `<option value=${obj}>${obj}</option>`);
+//            let time = `<option value=${obj}>${obj}</option>`;
+//            timesMenu.append(time);
+        }
+    })
+}
+
+
+
+
+
 
 
 //async function sendMessageToDoctor() {
@@ -89,11 +138,11 @@ const createAppointmentCards = (array) => {
                     <td>
                         <div class="user-info">
                             <div class="user-info__img">
-                                <img src="img/user1." alt="User Img">
+                                <img class="card-img-bottom" src="${obj.doctor.dimage}">
                             </div>
                             <div class="user-info__basic">
                                 <h5 class="mb-0">${obj.doctor.firstName} ${obj.doctor.lastName} , MD </h5>
-                                <p class="text-muted mb-0">34 yrs, Male</p>
+                                <p class="text-muted mb-0">${obj.doctor.dage}</p>
                             </div>
                         </div>
                     </td>
@@ -101,8 +150,8 @@ const createAppointmentCards = (array) => {
                         <span class="btn btn-success">${obj.appcategory}</span>
                     </td>
                     <td>
-                        <h6 class="mb-0">${obj.rTime}</h6>
-                        <small>${obj.rDate}</small>
+                        <h6 class="mb-0">${obj.rtime}</h6>
+                        <small>${obj.rdate}</small>
                     </td>
                     <td>
                         <h6 class="mb-0">${obj.doctor.email}</h6>
@@ -167,5 +216,13 @@ function handleLogout(){
     }
 }
 
-submitForm.addEventListener("submit", handleSubmit)
-getAppointments(patientId)
+
+checkLogin();
+document.getElementById('rDate').valueAsDate = new Date();
+updateTime()
+
+document.getElementById('rDate').addEventListener("click", updateTime);
+document.getElementById('rTime').addEventListener("click", updateTime);
+document.getElementById('doctor').addEventListener("click", updateTime);
+submitForm.addEventListener("submit", handleSubmit);
+getAppointments(patientId);
